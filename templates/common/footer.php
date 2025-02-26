@@ -94,7 +94,6 @@
   window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
     loader.classList.add('hidden');
-    document.getElementById("contact_form_2").reset();
   });
 </script>
 

@@ -199,7 +199,7 @@ nav {
     padding: 0 !important;
     color: var(--text-primary);
     position: relative;
-    font-size: 0.875rem;
+    font-size: 0.825rem;
     text-transform: uppercase;
 
     &:hover {
@@ -272,6 +272,7 @@ nav {
       line-height: 1.5;
       font-weight: 700;
       color: #fff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
     }
   }
 
@@ -426,7 +427,7 @@ nav {
     padding: 1rem;
     background-color: var(--white);
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 1rem;
     box-shadow: var(--bs-box-shadow);
     transition: all 0.3s ease;
     position: relative;
@@ -1108,6 +1109,32 @@ footer {
     .footer-middle,
     .footer-right {
       padding-left: 30px;
+    }
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  body {
+    font-size: 1vw !important;
+  }
+
+  nav {
+    .mt-lg-3 {
+      margin-top: 0.5rem !important;
+    }
+  }
+
+  nav .nav-link {
+    font-size: inherit;
+  }
+
+  .sectors-section {
+    .served {
+      li {
+        font-size: inherit;
+        font-weight: 500;
+        padding: 0.825rem 0.5rem;
+      }
     }
   }
 }

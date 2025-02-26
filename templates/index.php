@@ -143,25 +143,59 @@ include 'common/header.php';
   }
 
   @media (min-width: 1025px) and (max-width: 1280px) {
+    body {
+      font-size: 1vw !important;
+    }
 
     .capabilities,
     .facilities {
-      padding-top: 100px !important;
-      font-size: .95rem;
+      padding-top: 80px !important;
+      font-size: inherit;
     }
 
     .capabilities .mb-5,
     .facilities .mb-5 {
-      margin-bottom: 2.25rem !important;
+      margin-bottom: 2rem !important;
     }
 
     .capabilities .mb-4,
     .facilities .mb-4 {
-      margin-bottom: 1.25rem !important;
+      margin-bottom: 1.15rem !important;
+    }
+
+    .capabilities .mb-5,
+    .facilities .mb-5 {
+      margin-bottom: 0.925rem !important;
+    }
+
+    .capabilities .section-title,
+    .facilities .section-title {
+      font-size: 1.825rem !important;
+    }
+
+    .capabilities h5,
+    .facilities h5 {
+      font-size: 1rem !important;
     }
 
     .capabilities .card .card-body.p-4 {
       padding: 1rem !important;
+    }
+
+    .facilities .card-body {
+      padding: 8px;
+    }
+
+    .facilities .card .card-top-image {
+      height: 110px;
+    }
+
+    nav .nav-link {
+      font-size: inherit;
+    }
+
+    .mt-lg-3 {
+      margin-top: .5rem !important;
     }
   }
 
@@ -463,7 +497,7 @@ include 'common/header.php';
             </div>
 
             <div class="row justify-content-center">
-              <div class="col-lg-10">
+              <div class="col-lg-11">
                 <div>
                   <ul class="served">
                     <li style="cursor: pointer;" onclick="window.location.href='./aerospace'">

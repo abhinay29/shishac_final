@@ -14,7 +14,7 @@ include 'common/header.php';
       <div class="col-lg-4">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3712.761740105693!2d72.9940164!3d21.4778634!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be03d1a59ed38bb%3A0x4fe861fae7f113f4!2sShish%20Advanced%20Composites!5e0!3m2!1sen!2sin!4v1739266232308!5m2!1sen!2sin"
-          width="100%" height="510" style="border:0;" allowfullscreen="" loading="lazy"
+          width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
