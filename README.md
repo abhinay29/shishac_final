@@ -8,15 +8,11 @@ Put that access key in followin files.
     line no. 26, put access key in the value=""
 
     ```html
-    <pre>
-    <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY">
-    </pre>
+    <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY" />
     ```
 
 2.  ./templates/common/contact-section.php
     line no. 26, put access key in the value=""
     ```html
-    <pre>
-    <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY">
-    </pre>
+    <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY" />
     ```
