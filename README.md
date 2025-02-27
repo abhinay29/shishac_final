@@ -6,12 +6,17 @@ Put that access key in followin files.
 
 1.  ./templates/contact-us.php
     line no. 26, put access key in the value=""
+
+    ```html
     <pre>
     <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY">
     </pre>
+    ```
 
 2.  ./templates/common/contact-section.php
     line no. 26, put access key in the value=""
+    ```html
     <pre>
     <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY">
     </pre>
+    ```
