@@ -1046,8 +1046,19 @@ footer {
   .team {
     // background-color: #fbfbfb;
     .card {
+      p {
+        line-height: 1.5;
+      }
       .card-img-top {
         height: 360px;
+      }
+    }
+    .row {
+      .col-card {
+        flex: 1 0 100%;
+        width: 100%;
+        max-width: 100%;
+        // margin: 5px;
       }
     }
   }

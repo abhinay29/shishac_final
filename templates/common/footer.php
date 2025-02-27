@@ -89,7 +89,7 @@
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script> -->
-<script src="assets/js/main.js?v=1.0"></script>
+<script src="assets/js/main.js?v=1.1"></script>
 <script>
   window.addEventListener('load', function() {
     const loader = document.getElementById('loader');

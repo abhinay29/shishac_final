@@ -23,7 +23,7 @@ include 'common/header.php';
         <p class="mb-4">Send a message, We are always there to help you!</p>
         <!-- 3b19940e-153d-4328-ab10-4e63d8ca1e94 -->
         <form action="https://api.web3forms.com/submit" method="POST" id="contact_form">
-          <input type="hidden" name="access_key" value="3b19940e-153d-4328-ab10-4e63d8ca1e94">
+          <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY">
           <input type="hidden" name="subject" value="New Contact form Submission from SHISH Advanced Composites Website">
           <input type="hidden" name="from_name" value="Webmaster - SHISH Advanced Composites">
           <input type="checkbox" name="botcheck" id="" style="display: none;">

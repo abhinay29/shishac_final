@@ -877,8 +877,16 @@ footer .footer-right a:hover {
   .head-section .bottom-container p {
     margin-bottom: 0;
   }
+  .team .card p {
+    line-height: 1.5;
+  }
   .team .card .card-img-top {
     height: 360px;
+  }
+  .team .row .col-card {
+    flex: 1 0 100%;
+    width: 100%;
+    max-width: 100%;
   }
   .ul1.d-flex {
     justify-content: start !important;

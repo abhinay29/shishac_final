@@ -231,7 +231,7 @@ include 'common/header.php';
                 <h2 class="heading">
                   Built To Perform, Engineered To Last
                 </h2>
-                <img src="assets/images/slides/s21.png" alt="Slider Image">
+                <img src="assets/images/slides/s221.png" alt="Slider Image">
               </div>
             </div>
             <div class="swiper-slide">

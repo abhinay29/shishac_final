@@ -3,11 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 date_default_timezone_set('Asia/Kolkata');
-define('ABS_PATH', $_SERVER['DOCUMENT_ROOT']);
+define('ABS_PATH', $_SERVER['DOCUMENT_ROOT'] . '/shishac_final');
 define('TPL_PATH', ABS_PATH . '/templates/');
 
 // Replace http://localost with your website domain e.g. https://websitedomain.com
-$site_url = "http://localhost";
+$site_url = "http://localhost/shishac_final";
 
 
 $assets = $site_url . "/assets";
