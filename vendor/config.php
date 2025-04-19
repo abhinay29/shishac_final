@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(E_ALL);
+// error_reporting(E_ALL);
 
 $adminEmail = ''; // Admin email address to receive notifications
 $smtp['host'] = ''; // SMTP Hostname
