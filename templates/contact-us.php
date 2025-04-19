@@ -21,13 +21,7 @@ include 'common/header.php';
       <div class="col-lg-4 ps-lg-3 pt-5">
         <h4>Get in touch with us!</h4>
         <p class="mb-4">Send a message, We are always there to help you!</p>
-        <!-- 3b19940e-153d-4328-ab10-4e63d8ca1e94 -->
-        <form action="https://api.web3forms.com/submit" method="POST" id="contact_form">
-          <input type="hidden" name="access_key" value="WEB3FORM_ACCESS_KEY">
-          <input type="hidden" name="subject" value="New Contact form Submission from SHISH Advanced Composites Website">
-          <input type="hidden" name="from_name" value="Webmaster - SHISH Advanced Composites">
-          <input type="checkbox" name="botcheck" id="" style="display: none;">
-          <input type="hidden" name="redirect" value="https://web3forms.com/success">
+        <form action="#" method="POST" id="contact_form">
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
@@ -41,19 +35,20 @@ include 'common/header.php';
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <input type="text" class="form-control" name="Phone Number" placeholder="Phone Number *" required>
+                <input type="tel" class="form-control" name="phone" placeholder="Phone Number *" pattern="[6789][0-9]{9}" title="Please enter a valid 10-digit mobile number" minlength="10" maxlength="10" required>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <input type="text" class="form-control" name="Company" placeholder="Company">
+                <input type="text" class="form-control" name="company" placeholder="Company">
               </div>
             </div>
             <div class="col-lg-12">
               <div class="mb-5">
-                <textarea name="message" rows="5" class="form-control" placeholder="Requirements?"></textarea>
+                <textarea name="requirements" rows="5" class="form-control" placeholder="Requirements?"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
+              <input type="hidden" name="do" value="contactForm">
+              <button type="submit" id="contactFormSubmitBtn" class="btn btn-primary">Send Message</button>
             </div>
           </div>
         </form>
@@ -96,4 +91,35 @@ include 'common/footer.php';
     // Reset the form fields when the page loads
     document.getElementById("contact_form").reset();
   };
+</script>
+
+<script>
+  $("#contact_form").on("submit", function(e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "ajax.php",
+      data: formData,
+      beforeSend: function() {
+        $("#contactFormSubmitBtn").prop("disabled", true);
+        $("#contactFormSubmitBtn").text("Sending...");
+      },
+      success: function(res) {
+        res = JSON.parse(res);
+        console.log(res);
+        if (res.msg === "ok") {
+          alert("Your message has been sent successfully!");
+          $("#contact_form")[0].reset();
+        } else {
+          alert("There was an error sending your message. Please try again.");
+        }
+        $("#contactFormSubmitBtn").prop("disabled", false);
+        $("#contactFormSubmitBtn").text("Send Message");
+      },
+      error: function() {
+        alert("There was an error sending your message. Please try again.");
+      }
+    });
+  });
 </script>

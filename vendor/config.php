@@ -2,9 +2,9 @@
 
 error_reporting(E_ALL);
 
-$adminEmail = 'abhinaysharma.vw@gmail.com';
-$smtp['host'] = 'ms.crestawealth.com';
-$smtp['user'] = 'hello@ms.crestawealth.com';
-$smtp['pass'] = 'L7S2o.MH2NYp';
-$smtp['port'] = '587';
-$smtp['sender'] = 'Cresta Wealth';
+$adminEmail = ''; // Admin email address to receive notifications
+$smtp['host'] = ''; // SMTP Hostname
+$smtp['user'] = ''; // SMTP Username
+$smtp['pass'] = ''; // SMTP Password
+$smtp['port'] = ''; // SMTP Port use 465 for SSL
+$smtp['sender'] = 'SHISH Advanced Composites';

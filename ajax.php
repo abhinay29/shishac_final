@@ -4,7 +4,7 @@
 $retVal = array();
 
 if (!isset($_POST['do'])) {
-  header('location: ./');
+  $do = "";
 } else {
   $do = $_POST['do'];
 }
@@ -19,13 +19,10 @@ switch ($do) {
   case 'ctaForm':
 
     $data = [
-      'fname'     =>  $_POST['fname'],
-      'lname'     =>  $_POST['lname'],
-      'phone'    =>  $_POST['phone'],
-      'email'     =>  $_POST['email'],
-      'profession'  =>  $_POST['profession'],
-      'service'     =>  $_POST['service'],
-      'otherservices' =>  $_POST['otherservices']
+      'name'          =>  $_POST['name'],
+      'phone'         =>  $_POST['phone'],
+      'email'         =>  $_POST['email'],
+      'message'       =>  $_POST['message']
     ];
 
     $sendEmail = $clsMail->ctaForm($adminEmail, $data);
@@ -40,13 +37,11 @@ switch ($do) {
 
   case 'contactForm':
     $data = [
-      'fname'     =>  $_POST['fname'],
-      'lname'     =>  $_POST['lname'],
-      'phone'    =>  $_POST['phone'],
-      'email'     =>  $_POST['email'],
-      'profession'  =>  $_POST['profession'],
-      'service'     =>  $_POST['service'],
-      'otherservices' =>  $_POST['otherservices']
+      'name'          =>  $_POST['name'],
+      'phone'         =>  $_POST['phone'],
+      'email'         =>  $_POST['email'],
+      'company'       =>  $_POST['company'],
+      'requirements'  =>  $_POST['requirements']
     ];
 
     $sendEmail = $clsMail->contactForm($adminEmail, $data);
@@ -59,49 +54,58 @@ switch ($do) {
 
     break;
 
-  case 'serviceForm':
+  case 'careerForm':
     $data = [
-      'fname'     =>  $_POST['fname'],
-      'lname'     =>  $_POST['lname'],
-      'phone'    =>  $_POST['phone'],
-      'email'     =>  $_POST['email'],
-      'profession'  =>  $_POST['profession'],
-      'product'     =>  $_POST['product'],
-      'otherText' =>  $_POST['otherText']
+      'name'    =>  $_POST['name'],
+      'email'   =>  $_POST['email'],
+      'resume'  =>  isset($_FILES['resume']) ? $_FILES['resume'] : null,
+      'message' =>  $_POST['message']
     ];
 
-    $sendEmail = $clsMail->serviceForm($adminEmail, $data);
+    if ($data['resume'] && $data['resume']['error'] == 0) {
+      $fileName = $data['resume']['name'];
+      $fileTmpName = $data['resume']['tmp_name'];
+      $fileSize = $data['resume']['size'];
+      $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+      $sanitizedUserName = preg_replace('/[^a-zA-Z0-9]/', '_', $data['name']);
+      $fileName = 'resume_' . $sanitizedUserName . '_' . date('Ymd_His') . '.' . $fileType;
+
+      // Check file size (5MB limit)
+      if ($fileSize > 5 * 1024 * 1024) {
+        $retVal['status'] = 'err';
+        $retVal['err'] = 'Max allowed file size is 5MB.';
+        echo json_encode($retVal);
+        exit;
+      }
+
+      // Move the uploaded file to a specific directory
+      $uploadDir = 'uploads/';
+      if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+      }
+      move_uploaded_file($fileTmpName, 'uploads/' . $fileName);
+      $data['resume_name'] = $fileName;
+    } else {
+      $retVal['status'] = 'err';
+      $retVal['err'] = 'File upload error, please try again. File type should be .pdf, .doc, or .docx';
+      echo json_encode($retVal);
+      exit;
+    }
+
+    $sendEmail = $clsMail->careerForm($adminEmail, $data);
 
     if ($sendEmail) {
-      $retVal['msg'] = 'ok';
+      $retVal['status'] = 'ok';
     } else {
-      $retVal['msg'] = 'err';
+      $retVal['status'] = 'err';
     }
 
     break;
 
-  case 'quizForm':
-    $data = [
-      'fname'             =>  $_POST['fname'],
-      'lname'             =>  $_POST['lname'],
-      'phone'             =>  $_POST['phone'],
-      'email'             =>  $_POST['email'],
-      'annual_income'     =>  $_POST['annual_income'],
-      'monthly_expenses'  =>  $_POST['monthly_expenses'],
-      'life_event'        =>  $_POST['life_event'],
-      'risk_tolerance'    =>  $_POST['risk_tolerance'],
-      'existing_plan'     =>  $_POST['existing_plan']
-    ];
-
-    $sendEmail = $clsMail->quizForm($adminEmail, $data);
-
-    if ($sendEmail) {
-      $retVal['msg'] = 'ok';
-    } else {
-      $retVal['msg'] = 'err';
-    }
-
+  default:
+    $retVal['msg'] = 'err';
     break;
 }
+
 
 echo json_encode($retVal);

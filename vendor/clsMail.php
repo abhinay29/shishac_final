@@ -23,18 +23,37 @@ function phpmailer($email, $subject, $body)
 
   // Production
 
+  // $mail = new PHPMailer(true);
+  // $mail->isSMTP();
+  // $mail->SMTPDebug = 0;
+  // // $mail->SMTPSecure = 'tls';
+  // $mail->SMTPSecure = false;
+  // $mail->SMTPOptions = array(
+  //   'ssl' => array(
+  //     'verify_peer' => false,
+  //     'verify_peer_name' => false,
+  //     'allow_self_signed' => true
+  //   )
+  // );
+  // $mail->Host = $smtp_host;
+  // $mail->Port = $smtp_port;
+  // $mail->SMTPAuth = true;
+  // $mail->SMTPAutoTLS = true;
+  // $mail->Password = $smtp_pass;
+  // $mail->Username = $smtp_user;
+  // $mail->setFrom($smtp_user, $smtp_sender);
+  // $mail->addAddress($email);
+  // $mail->addReplyTo($smtp_user, $smtp_sender);
+  // $mail->isHTML(true);
+  // $mail->Subject = $subject;
+  // $mail->Body = $body;
+  // $send = $mail->send();
+  // return $send;
+
   $mail = new PHPMailer(true);
   $mail->isSMTP();
   $mail->SMTPDebug = 0;
-  // $mail->SMTPSecure = 'tls';
-  $mail->SMTPSecure = false;
-  $mail->SMTPOptions = array(
-    'ssl' => array(
-      'verify_peer' => false,
-      'verify_peer_name' => false,
-      'allow_self_signed' => true
-    )
-  );
+  $mail->SMTPSecure = 'ssl';
   $mail->Host = $smtp_host;
   $mail->Port = $smtp_port;
   $mail->SMTPAuth = true;
@@ -60,22 +79,20 @@ class clsMail
   function ctaForm($adminEmail, $data = array())
   {
 
-    $subject = "[CrestaWealth] CTA Form Data";
+    $subject = "[SHISH Advanced Composites] CTA Form Data";
 
     $body = "Hello Admin,<br>
       <p>CTA form details are following.</p>      
       <table style='width: 400px;'>
-        <tr><td style='width: 30%;'><strong>Name</strong></td><td>{$data['fname']} {$data['lname']}</td></tr>
+        <tr><td style='width: 30%;'><strong>Name</strong></td><td>{$data['name']}</td></tr>
         <tr><td><strong>Phone Number</strong></td><td>{$data['phone']}</td></tr>
         <tr><td><strong>Email</strong></td><td>{$data['email']}</td></tr>
-        <tr><td><strong>Profession</strong></td><td>{$data['profession']}</td></tr>
-        <tr><td><strong>Looking For</strong></td><td>{$data['service']}</td></tr>
-        <tr><td><strong>Other</strong></td><td>{$data['otherservices']}</td></tr>
+        <tr><td><strong>Message</strong></td><td>{$data['message']}</td></tr>
       </table>
       <br><br>
       <p>Regards,</p>
       <p>WebMaster</p>
-      <p>Cresta Wealth</p>
+      <p>SHISH Advanced Composites</p>
       ";
 
     $sendMail = phpmailer($adminEmail, $subject, $body);
@@ -86,22 +103,21 @@ class clsMail
   function contactForm($adminEmail, $data = array())
   {
 
-    $subject = "[CrestaWealth] Contact Us Form Data";
+    $subject = "[SHISH Advanced Composites] Contact Us Form Data";
 
     $body = "Hello Admin,<br>
       <p>Contact Us form details are following.</p>      
       <table style='width: 400px;'>
-        <tr><td style='width: 30%;'><strong>Name</strong></td><td>{$data['fname']} {$data['lname']}</td></tr>
+        <tr><td style='width: 30%;'><strong>Name</strong></td><td>{$data['name']}</td></tr>
         <tr><td><strong>Phone Number</strong></td><td>{$data['phone']}</td></tr>
         <tr><td><strong>Email</strong></td><td>{$data['email']}</td></tr>
-        <tr><td><strong>Profession</strong></td><td>{$data['profession']}</td></tr>
-        <tr><td><strong>Looking For</strong></td><td>{$data['service']}</td></tr>
-        <tr><td><strong>Other</strong></td><td>{$data['otherservices']}</td></tr>
+        <tr><td><strong>Company</strong></td><td>{$data['company']}</td></tr>
+        <tr><td><strong>Requirements</strong></td><td>{$data['requirements']}</td></tr>
       </table>
       <br><br>
       <p>Regards,</p>
       <p>WebMaster</p>
-      <p>Cresta Wealth</p>
+      <p>SHISH Advanced Composites</p>
       ";
 
     $sendMail = phpmailer($adminEmail, $subject, $body);
@@ -109,56 +125,53 @@ class clsMail
     return $sendMail;
   }
 
-  function serviceForm($adminEmail, $data = array())
+  function careerForm($adminEmail, $data = array())
   {
+    global $smtp;
 
-    $subject = "[CrestaWealth] Investment Products Form Data";
-
+    $subject = "[SHISH Advanced Composites] Career Application";
     $body = "Hello Admin,<br>
-      <p>Investment Products form details are following.</p>      
+      <p>Resume Submitted in Career Form.</p>      
       <table style='width: 400px;'>
-        <tr><td style='width: 30%;'><strong>Name</strong></td><td>{$data['fname']} {$data['lname']}</td></tr>
-        <tr><td><strong>Phone Number</strong></td><td>{$data['phone']}</td></tr>
+        <tr><td style='width: 30%;'><strong>Name</strong></td><td>{$data['name']}</td></tr>
         <tr><td><strong>Email</strong></td><td>{$data['email']}</td></tr>
-        <tr><td><strong>Profession</strong></td><td>{$data['profession']}</td></tr>
-        <tr><td><strong>Looking For</strong></td><td>{$data['product']}</td></tr>
-        <tr><td><strong>Other</strong></td><td>{$data['otherText']}</td></tr>
+        <tr><td><strong>Message</strong></td><td>{$data['message']}</td></tr>
       </table>
+      <p>Please find the file in attachment.</p>
       <br><br>
       <p>Regards,</p>
       <p>WebMaster</p>
-      <p>Cresta Wealth</p>
+      <p>SHISH Advanced Composites</p>
       ";
 
-    $sendMail = phpmailer($adminEmail, $subject, $body);
+    $uploadDir = dirname(__DIR__) . '/uploads/';
+    $filePath = $uploadDir . $data['resume_name'];
 
-    return $sendMail;
-  }
-  function quizForm($adminEmail, $data = array())
-  {
+    if (!file_exists($filePath)) {
+      throw new Exception("File not found: " . $filePath);
+    }
 
-    $subject = "[CrestaWealth] Financial Planning Readiness Quiz Form Data";
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->SMTPDebug = 0;
+    $mail->SMTPSecure = 'ssl';
+    $mail->Host = $smtp['host'];
+    $mail->Port = $smtp['port'];
+    $mail->SMTPAuth = true;
+    $mail->SMTPAutoTLS = true;
+    $mail->Password = $smtp['pass'];
+    $mail->Username = $smtp['user'];
+    $mail->setFrom($smtp['user'], $smtp['sender']);
+    $mail->addAddress($adminEmail);
+    $mail->addReplyTo($smtp['user'], $smtp['sender']);
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
 
-    $body = "Hello Admin,<br>
-      <p>Financial Planning Readiness Quiz form details are following.</p>      
-      <table style='max-width: 800px; width: 100%;'>
-        <tr><td style='width: 30%;'><strong>Name</strong></td><td>{$data['fname']} {$data['lname']}</td></tr>
-        <tr><td><strong>Phone Number</strong></td><td>{$data['phone']}</td></tr>
-        <tr><td><strong>Email</strong></td><td>{$data['email']}</td></tr>
-        <tr><td><strong>Current Annual Income</strong></td><td>{$data['annual_income']}</td></tr>
-        <tr><td><strong>Monthly Expenses</strong></td><td>{$data['monthly_expenses']}</td></tr>
-        <tr><td><strong>Life Event in the near future</strong></td><td>{$data['life_event']}</td></tr>
-        <tr><td><strong>Risk Tolerance to investing</strong></td><td>{$data['risk_tolerance']}</td></tr>
-        <tr><td><strong>Existing Financial Plans or Investments</strong></td><td>{$data['existing_plan']}</td></tr>
-      </table>
-      <br><br>
-      <p>Regards,</p>
-      <p>WebMaster</p>
-      <p>Cresta Wealth</p>
-      ";
+    // Attach the file
+    $mail->addAttachment($filePath);
 
-    $sendMail = phpmailer($adminEmail, $subject, $body);
-
-    return $sendMail;
+    $send = $mail->send();
+    return $send;
   }
 } // clsMail

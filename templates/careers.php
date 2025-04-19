@@ -20,33 +20,30 @@ include 'common/header.php';
     <div class="row">
       <div class="col-lg-5 pe-lg-5">
         <h4 class="mb-4">Apply Now</h4>
-        <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" id="career_form">
-          <input type="hidden" name="access_key" value="07435991-8eab-4a8f-8ef1-9cd4e7ea9e5a">
-          <input type="hidden" name="subject" value="Career form Submission from SHISH Advanced Composites Website">
-          <input type="hidden" name="from_name" value="Webmaster - SHISH Advanced Composites">
-          <input type="checkbox" name="botcheck" id="" style="display: none;">
-          <input type="hidden" name="redirect" value="https://web3forms.com/success">
+        <form action="#" method="POST" enctype="multipart/form-data" id="careerForm">
+          <input type="hidden" name="do" value="careerForm">
           <div class="mb-3">
             <label for="name" class="form-label">Name:</label>
-            <input type="text" id="name" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" required>
           </div>
 
           <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" required>
+            <input type="email" name="email" class="form-control" required>
           </div>
 
           <div class="mb-3">
-            <label for="formFile" class="form-label">Upload Resume:</label>
-            <input class="form-control" type="file" id="resume" name="attachment" accept=".pdf, .doc, .docx" required>
+            <label for="resume" class="form-label">Upload Resume:</label>
+            <input class="form-control mb-2" type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required>
+            <p style="font-style: italic; font-size: 12px;">Max file size allowed is 5 MB, and file type should be .pdf, .doc, or .docx</p>
           </div>
 
           <div class="mb-3">
-            <label for="message" class="form-label">Message:</label>
-            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+            <label class="form-label">Message:</label>
+            <textarea name="message" class="form-control" rows="4"></textarea>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit Application</button>
+          <button type="submit" id="resumeSubmitBtn" class="btn btn-primary">Submit Application</button>
         </form>
       </div>
       <div class="col-lg-7 ps-lg-5">
@@ -67,6 +64,37 @@ include 'common/footer.php';
 <script>
   window.onload = function() {
     // Reset the form fields when the page loads
-    document.getElementById("career_form").reset();
+    document.getElementById("careerForm").reset();
   };
+</script>
+
+<script>
+  $('#careerForm').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+      type: 'POST',
+      url: 'ajax.php',
+      data: formData,
+      contentType: false,
+      processData: false,
+      beforeSend: function() {
+        $('#resumeSubmitBtn').prop('disabled', true).html('Submitting...');
+      },
+      success: function(response) {
+        var data = JSON.parse(response);
+        if (data.status === 'ok') {
+          alert('Your application has been submitted successfully!');
+          $('#careerForm')[0].reset();
+        } else {
+          alert('Error: ' + data.err);
+        }
+        $('#resumeSubmitBtn').prop('disabled', false).html('Submit Application');
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr.responseText);
+        alert('An error occurred. Please try again later.');
+      }
+    });
+  });
 </script>

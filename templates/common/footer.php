@@ -87,13 +87,46 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"
   integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script> -->
 <script src="assets/js/main.js?v=1.1"></script>
 <script>
   window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
     loader.classList.add('hidden');
+  });
+</script>
+
+<script>
+  window.onload = function() {
+    // Reset the form fields when the page loads
+    document.getElementById("ctaForm").reset();
+  };
+</script>
+
+<script>
+  $('#ctaForm').on('submit', function(e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      type: 'POST',
+      url: 'ajax.php',
+      data: formData,
+      beforeSend: function() {
+        $('#ctaFormSubmitBtn').prop('disabled', true).html('Sending...');
+      },
+      success: function(res) {
+        res = JSON.parse(res);
+        if (res.msg === 'ok') {
+          alert('Your message has been sent successfully!');
+          $('#ctaForm')[0].reset();
+        } else {
+          alert('There was an error sending your message. Please try again.');
+        }
+        $('#ctaFormSubmitBtn').prop('disabled', false).html('Submit <i class="fa-regular fa-paper-plane ms-2"></i>');
+      },
+      error: function() {
+        alert('There was an error sending your message. Please try again.');
+      }
+    });
   });
 </script>
 
